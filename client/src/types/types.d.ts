@@ -7,7 +7,8 @@ interface IAuthContext {
     isAuth: boolean,
     userDto: IUserDto,
     registration: (regData: IRegFormData) => void,
-    login: (loginData: ILogFormData) => void
+    login: (loginData: ILogFormData) => void,
+    logout: () => void
 }
 
 type TUserDto = {
@@ -33,3 +34,8 @@ interface PetData {
 
 type IRegFormData = UserData & PetData
 type ILogFormData = Omit<UserData, 'name'>
+
+interface ILink {
+    title: string,
+    path: Paths
+}

@@ -4,5 +4,6 @@ export const AuthContext = createContext<IAuthContext>({
     isAuth: false,
     userDto: {},
     login: async () => {},
-    registration: async () => {}
+    registration: async () => {},
+    logout: () => {}
 })
