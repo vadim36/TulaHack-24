@@ -49,7 +49,6 @@ export const UserPage:FC = () => {
         pet: petFormData,
         userId: userDto.user.userId
       })
-      console.log(petDto)
   
       setPets((prev) => [...prev, {...petDto.data}])
       setPetFormData(INITIAL_FORM_STATE)

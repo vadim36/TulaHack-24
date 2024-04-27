@@ -15,12 +15,26 @@ class PetsController {
                     ownerId: request.params.accessToken
                 }
             })
-            console.log(request.query.accessToken)
+
             if (!pets) throw ApiError.UnauthtorizedError()
             response.setHeader('Content-Type', 'application/json')
             response.send(pets)
         } catch (error: unknown) {
             return  next(error as Error)
+        }
+    }
+
+    async getPet(request: Request<{}, {}, {}, {petId: string}>, response: Response, next: Function) {
+        try {
+            const pet = await prisma.pet.findUnique({
+                where: { petId: request.query.petId }
+            })
+
+            if (!pet) throw ApiError.UnauthtorizedError()
+            response.setHeader('Content-Type', 'application/json')
+            response.send(pet)
+        } catch (error: unknown) {
+            return next(error as Error)
         }
     }
 
