@@ -31,8 +31,8 @@ model Pet {
     age     Int
     weight  Int
     breed   String
-    owner   User   @relation(fields: [ownerId], references: [username])
-    ownerId String @unique
+    owner   User?   @relation(fields: [ownerId], references: [username])
+    ownerId String?
 }
 
 model Task {

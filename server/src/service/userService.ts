@@ -56,7 +56,6 @@ class UserService {
   }
 
   async logout(refreshToken: string):Promise<RefreshToken> {
-    console.log(refreshToken)
     const candidateToken = await prisma.refreshToken.findFirst({
       where: {tokenBody: refreshToken}
     })

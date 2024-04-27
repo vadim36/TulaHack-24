@@ -40,3 +40,19 @@ export const LoginScheme = object({
     maxLength(32, 'the password must be longer than 32')
   ])
 })
+
+export const PetRegScheme = object({
+  petBreed: string(),
+  petName: string('the petName must be a string', [
+      minLength(3, 'the pet name must be longer than 3'),
+      maxLength(32, 'the pet name must be less than 32')
+  ]),
+  petAge: number('the pet age must be a number', [
+      minValue(-1, 'the pet age must be -1 and more'),
+      maxValue(150, 'tha pet age must be 150 and less')
+  ]),
+  petWeight: number('the pet weight must be a number', [
+      minValue(-1, 'the pet weight must be -1 and more'),
+      maxValue(150, 'tha pet weight must be 150 and less')
+  ])
+})
