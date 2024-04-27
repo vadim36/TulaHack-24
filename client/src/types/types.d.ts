@@ -12,9 +12,15 @@ interface IAuthContext {
 }
 
 type TUserDto = {
-    username: string,
-    name: string,
-    email: string
+    user: {
+        name: string,
+        userId: string,
+        email: string
+    },
+    tokens: {
+        accessToken: string,
+        refreshToken: string
+    }
 } | {}
 
 interface UserData {

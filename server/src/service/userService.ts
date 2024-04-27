@@ -56,7 +56,8 @@ class UserService {
   }
 
   async logout(refreshToken: string):Promise<RefreshToken> {
-    const candidateToken = await prisma.refreshToken.findUnique({
+    console.log(refreshToken)
+    const candidateToken = await prisma.refreshToken.findFirst({
       where: {tokenBody: refreshToken}
     })
     if (!candidateToken) throw ApiError.BadRequest('Such user does not exist')

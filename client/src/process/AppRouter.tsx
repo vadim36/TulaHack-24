@@ -13,10 +13,11 @@ export const AppRouter:FC = () => {
     async function login(loginData: ILogFormData) {
         try {
             const data = parse(LoginUserScheme, loginData)
-            alert('User was created')
+            const userData = await $api.post('/auth/login', data)
             setIsAuth(true)
-            setUserDto({ name: 'Vadim', username: '', email: 'test@gmail.co'})
-            return localStorage.setItem('user', JSON.stringify(data))
+            setUserDto(userData.data)
+            localStorage.setItem('user', JSON.stringify(userData.data))
+            return localStorage.setItem('token', JSON.stringify(userData.data.tokens.refreshToken))
         } catch (error: unknown) {
             alert(error)
         }
@@ -25,11 +26,11 @@ export const AppRouter:FC = () => {
     async function registration(regData: IRegFormData) {
         try {
             const data = parse(RegUserScheme, regData)
-            alert(`User was created`)
             const userData = await $api.post('/auth/registration', data)
             setIsAuth(true)
-            setUserDto(userData)
-            return localStorage.setItem('user', JSON.stringify(data))
+            setUserDto(userData.data)
+            localStorage.setItem('user', JSON.stringify(userData.data))
+            return localStorage.setItem('token', JSON.stringify(userData.data.tokens.accessToken))
         } catch (error: unknown) {
             alert(error)
         }
@@ -37,8 +38,12 @@ export const AppRouter:FC = () => {
 
     async function logout() {
         try {
-            alert('You was exit')
+            await $api.post('/auth/logout', {
+                //@ts-ignore
+                refreshToken: userDto.tokens.refreshToken
+            })
             localStorage.removeItem('user')
+            localStorage.removeItem('token')
             setIsAuth(false)
             return setUserDto({})
         } catch (error: unknown) {
