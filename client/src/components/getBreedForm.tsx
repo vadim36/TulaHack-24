@@ -11,7 +11,7 @@ export const GetBreedForm:FC<GetBreedFormProps> = ({petBreed, updateFields}) => 
           <strong>Выберете породу вашего питомца:</strong>
           {breeds.map((breed: TBreed) => {
             return (
-                <label>
+                <label key={breed}>
                     <input type="radio" 
                         name="breed" value={breed}
                         checked={breed === petBreed}
