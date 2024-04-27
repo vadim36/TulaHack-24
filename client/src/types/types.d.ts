@@ -1,0 +1,35 @@
+interface IRoute {
+    path: Paths,
+    element: ReactElement
+}
+
+interface IAuthContext {
+    isAuth: boolean,
+    userDto: IUserDto,
+    registration: (regData: IRegFormData) => void,
+    login: (loginData: ILogFormData) => void
+}
+
+type TUserDto = {
+    username: string,
+    name: string,
+    email: string
+} | {}
+
+interface UserData {
+    name: string,
+    email: string,
+    password: string
+}
+
+type TBreed = 'Кошка' | 'Собака' | 'Крыса' | 'Лягушка' | 'Черепаха' | 'Пони'
+
+interface PetData {
+    petBreed: TBreed,
+    petName: string,
+    petAge: number | '',
+    petWeight: number | ''
+}
+
+type IRegFormData = UserData & PetData
+type ILogFormData = Omit<UserData, 'name'>
