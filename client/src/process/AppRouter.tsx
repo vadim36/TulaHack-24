@@ -4,6 +4,7 @@ import { authRoutes, guestRoutes } from "@/lib/routing/routes"
 import { AuthContext } from "@/lib/context"
 import {parse} from 'valibot'
 import { LoginUserScheme, RegUserScheme } from "@/lib/validation"
+import $api from "@/lib/http"
 
 export const AppRouter:FC = () => {
     const [isAuth, setIsAuth] = useState<boolean>(false)
@@ -24,9 +25,10 @@ export const AppRouter:FC = () => {
     async function registration(regData: IRegFormData) {
         try {
             const data = parse(RegUserScheme, regData)
-            alert(`User was created ${JSON.stringify(data)}`)
+            alert(`User was created`)
+            const userData = await $api.post('/auth/registration', data)
             setIsAuth(true)
-            setUserDto({ name: 'Vadim', username: '', email: 'test@gmail.co'})
+            setUserDto(userData)
             return localStorage.setItem('user', JSON.stringify(data))
         } catch (error: unknown) {
             alert(error)

@@ -1,0 +1,57 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model User {
+    username     String        @id @default(uuid())
+    name         String 
+    email        String        @unique
+    password     String
+    refreshToken RefreshToken? 
+    pets         Pet[]
+    tasks        Task[]
+    habits       Habit[]
+}
+
+model RefreshToken {
+    tokenId   String @id @default(uuid())
+    tokenBody String @unique
+    user      User   @relation(fields: [userId], references: [username])
+    userId    String @unique
+}
+
+model Pet {
+    petId   String @id @default(uuid())
+    name    String
+    age     Int
+    weight  Int
+    breed   String
+    owner   User   @relation(fields: [ownerId], references: [username])
+    ownerId String @unique
+}
+
+model Task {
+    taskId      String   @id @default(uuid())
+    taskBody    String
+    taskStatus  Statuses
+    owner       User     @relation(fields: [ownerId], references: [username])
+    ownerId     String   @unique
+}
+
+model Habit {
+    habitId   String @id @default(uuid())
+    habitBody String
+    owner     User   @relation(fields: [ownerId], references: [username])
+    ownerId   String @unique
+}
+
+enum Statuses {
+    Todo
+    InProgress
+    Completed
+}
