@@ -45,3 +45,12 @@ interface ILink {
     title: string,
     path: Paths
 }
+
+interface TResponsePet {
+    breed: TBreed,
+    name: string,
+    age: number,
+    weight: number,
+    petId: string,
+    ownerId: string
+}

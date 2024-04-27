@@ -3,5 +3,6 @@ export enum Paths {
     login = '/login',
     user = '/user',
     home = '/home',
+    pet = '/pet/:id',
     all = '*'
 }
