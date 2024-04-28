@@ -5,12 +5,18 @@ import $api from '@/lib/http'
 import { AuthContext } from '@/lib/context'
 import useFetching from '@/hooks/useFetching'
 import { Loader } from '@/components/Loader'
+import Recomendations from '@/lib/recomendations'
 
 const INITIAL_FORM_STATE:ITask = {
   taskBody: '',
   taskStatus: Statuses.Todo
 }
 
+function getRandom() {
+  const random =  Math.random() * 5
+  return new Recomendations().arr[Math.round(random)] 
+}
+ 
 export const HomePage:FC = () => {
   const [formData, setFormData] = useState<ITask>(INITIAL_FORM_STATE)
   const [tasks, setTasks] = useState<ITask[]>([])
@@ -56,6 +62,11 @@ export const HomePage:FC = () => {
   return (
     <div className='bg-[#7465AD] h-dvh'>
       <AppBar/>
+      <div className='bg-[#FEB1AF] p-2 rounded-md
+        border-4 border-[#4d427a] h-16 flex items-center m-2'>
+          Рекомендации по уходу за животным:
+          {getRandom()}
+      </div>
       <h1 className='font-bold text-[#403569] text-2xl p-2'>Задачи по уходу за животным:</h1>
       <form onSubmit={createTask} className='border border-black py-2'>
         <fieldset className='flex gap-2 items-start p-1'>

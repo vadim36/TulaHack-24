@@ -32,26 +32,25 @@ export const PetPage:FC = () => {
     }, [])
 
     return (
-      <>
+      <div className='h-dvh bg-[#7465AD] p-2 flex'>
         <Link to={Paths.user}>
-            <button className='bg-sky-500 text-xl rounded-lg text-center 
-                p-1 px-2 text-white'>Назад</button>
+            <button className='bg-[#4a4071] text-white text-2xl rounded-md text-center p-2'> 
+            Назад </button>
         </Link>
         {loading && <Loader/>}
         {loadingError  && <h1>{loadingError}</h1>}
-        {petData && (<div>
+        {petData && (<div className='flex-1 ml-2'>
             {petData?.name} {petData?.breed}
             <div>
                 <strong>Вес: {petData?.weight}</strong>
                 <strong>Возраст: {petData?.age}</strong>
             </div>
-            <button className='bg-red-500 text-white text-xl rounded-lg text-center p-1 px-2
-                relative active:top-1' onClick={removePet}>
+            <MedCard {...petData}/>
+            <button className='bg-[#4a4071] text-white text-2xl rounded-md text-center p-2' onClick={removePet}>
                 Удалить питомца
             </button>
-            <MedCard {...petData}/>
         </div>
         )}
-      </>
+      </div>
     )
 }

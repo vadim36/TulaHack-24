@@ -16,7 +16,7 @@ export const MedCard:FC<PetData> = (petData) => {
                 <dt className='font-semibold text-lg'>Вес:</dt>
                 <dd>{petData.weight}</dd>
             </dl>
-            <a href="https://vetbum.ru" className='text-blue-800 text-xl'>
+            <a href="https://vetbum.ru" className='text-blue-900 text-mono text-xl'>
                 Записаться на прием
             </a>
         </div>

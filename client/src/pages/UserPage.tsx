@@ -89,16 +89,16 @@ export const UserPage:FC = () => {
                   className='size-10'/>
               </button>
           </ul>
-          <dialog ref={$petModal} className='border border-black rounded-md px-2
-            py-1'>
+          <dialog ref={$petModal} className='rounded-md px-2
+            py-1 bg-slate-200/50 outline-0 w-1/3'>
             <form onSubmit={submitHandler}>
               <RegPetForm {...petFormData} updateFields={updateFields}/>
-              <button className='bg-sky-500 text-white text-lg rounded-lg text-center p-1 px-2'>
+              <button className='bg-[#4a4071] text-white text-xl rounded-md text-center p-2'>
                 Создать питомца
               </button>
             </form>
             <button onClick={() => $petModal.current?.close()}
-              className='bg-red-500 text-white text-lg rounded-lg text-center p-1 px-2'>
+              className='bg-[#4a4071] text-white text-xl rounded-md text-center p-2'>
                 Закрыть
             </button>
           </dialog>
