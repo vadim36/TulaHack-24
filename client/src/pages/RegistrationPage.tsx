@@ -36,13 +36,26 @@ export const RegistrationPage:FC = () => {
   }
 
   return (
-    <form onSubmit={submitHandler}>
-      {currentIndex + 1} / {steps.length}
-      {stepForm}
-      {!isFirstStep && <button type='button' onClick={back}>Назад</button>}
-      <button>
-        {!isLastStep ? 'Дальше' : 'Завершить'}
-      </button>
-    </form>
+    <div className='h-dvh bg-auto flex justify-center flex-col items-center' 
+      style={{backgroundImage: 'url("@/../public/form.png")'}}
+    >
+      <h1 className='text-white text-mono text-4xl font-bold bg-slate-600/75
+        p-2 rounded-lg'
+      >
+        Давайте познакомимся!
+      </h1>
+      <form onSubmit={submitHandler} className='bg-slate-700/70 p-2 rounded-md mt-2 w-1/3'>
+        <strong className='text-white'>{currentIndex + 1} / {steps.length}</strong>
+        {stepForm}
+        {!isFirstStep && <button type='button' onClick={back}
+         className='px-2 py-1 text-lg border-1 bg-slate-800 rounded-md text-white'>
+          Назад
+        </button>}
+        <button className='bg-[#393059] p-2 rounded-lg relative active:top-1
+            text-white text-lg ml-2'>
+          {!isLastStep ? 'Дальше' : 'Завершить'}
+        </button>
+      </form>
+    </div>
   )
 }

@@ -23,9 +23,6 @@ class TasksController {
                     taskBody: taskData.taskBody,
                     taskStatus: Statuses.Todo,
                     ownerId
-                },
-                select: {
-                    taskBody: true, taskStatus: true
                 }
             })
 
@@ -56,6 +53,7 @@ class TasksController {
         request: Request<{}, {}, {taskId: string}>, 
         response: Response, next: Function
     ) {
+
         try {
             const taskId = parse(string(), request.body.taskId)
             await prisma.task.delete({ where: {taskId}})
