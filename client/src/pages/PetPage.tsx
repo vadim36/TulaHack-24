@@ -5,6 +5,7 @@ import { Paths } from '@/lib/enums'
 import $api from '@/lib/http'
 import useFetching from '@/hooks/useFetching'
 import { Loader } from '@/components/Loader'
+import { MedCard } from '@/components/MedCard'
 
 export const PetPage:FC = () => {
     const {id} = useParams()
@@ -48,6 +49,7 @@ export const PetPage:FC = () => {
                 relative active:top-1' onClick={removePet}>
                 Удалить питомца
             </button>
+            <MedCard {...petData}/>
         </div>
         )}
       </>

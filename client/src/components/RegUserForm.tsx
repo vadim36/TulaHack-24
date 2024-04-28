@@ -10,12 +10,13 @@ export const RegUserForm:FC<RegUserFormProps> = ({
     name, email, password , updateFields
 }) => {
   return (
-    <fieldset>
+    <fieldset className='flex flex-col items-start'>
       <legend>Регистрация пользователя</legend>
       <input type="text" 
         placeholder='Ваше имя...'
         value={name}
         required
+        className='border border-black rounded-sm text-lg px-1'
         minLength={3}
         maxLength={24}
         onChange={(event: ChangeEvent<HTMLInputElement>) => {
@@ -26,6 +27,7 @@ export const RegUserForm:FC<RegUserFormProps> = ({
         placeholder='Ваш email...'
         value={email} 
         required
+        className='border border-black rounded-sm text-lg px-1'
         minLength={8}
         maxLength={64}
         onChange={(event: ChangeEvent<HTMLInputElement>) => {
@@ -37,6 +39,7 @@ export const RegUserForm:FC<RegUserFormProps> = ({
         value={password}
         minLength={3}
         required
+        className='border border-black rounded-sm text-lg px-1'
         maxLength={32}
         onChange={(event: ChangeEvent<HTMLInputElement>) => {
           return updateFields({ password: event.target.value })

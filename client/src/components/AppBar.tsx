@@ -12,18 +12,18 @@ export const AppBar:FC = () => {
     const {logout} = useContext(AuthContext)
 
     return (
-      <header className='flex border border-black p-2 justify-around'>
-          <h1 className='font-semibold text-5xl'>AnyTail</h1>
+      <header className='flex p-2 justify-around items-center bg-[#FEB1AF]'>
+          <img src="@/../public/logo.png" alt="logo" className='w-24 h-16'/>
           <nav>
               <ul className='flex items-center h-full gap-2'>
                   {links.map((link: ILink) => {
                       return <li key={link.path}>
                           <NavLink to={link.path} className={({ isActive }) => {
                               return isActive 
-                                ? 'bg-red-500 p-2 rounded-lg relative active:top-1' 
-                                : 'bg-sky-500 p-2 rounded-lg relative active:top-1'
+                                ? 'text-white rounded-lg relative active:top-1' 
+                                : 'text-[#7465AD] rounded-lg relative active:top-1'
                           }}>
-                            <button className="text-white text-2xl p-2">
+                            <button className="font-semibold text-2xl p-2 font-mono">
                                 {link.title}
                             </button>
                           </NavLink>
@@ -31,8 +31,8 @@ export const AppBar:FC = () => {
                   })}
               </ul>
           </nav>
-          <button className='bg-red-500 px-2 text-xl rounded-lg relative active:top-1
-            text-white' onClick={logout}>Выйти</button>
+          <button className='border px-2 text-xl rounded-lg relative active:top-1
+            text-[#7465AD] font-semibold border-black h-12' onClick={logout}>Выйти</button>
       </header>
     )
 }

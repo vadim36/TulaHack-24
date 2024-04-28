@@ -56,47 +56,54 @@ export const UserPage:FC = () => {
   }
 
   return (
-    <>
+    <div className='bg-[#7465AD] h-dvh'>
       <AppBar/>
-      <section>
-        <div className='flex flex-col'>
+      <section className='p-2'>
+        <div className='flex flex-col items-center'>
           <img 
-            src="https://www.svgrepo.com/show/44183/male-user.svg" 
+            src="@/../public/user.png" 
             alt="user img"
             className='size-24'
           />
-          <strong>Ваше имя: {name}</strong>
-          <strong>Ваш email: {email}</strong>
+          <strong className='text-white font-mono font-bold text-4xl'>{name}</strong>
+          <strong className='text-white font-mono font-semibold'>{email}</strong>
         </div>
         <div>
-          <strong>Мои хвостики:</strong>
-          <ul className='flex gap-2'>
+          <strong className='text-[#362e54] font-bold text-2xl'>Мои хвостики:</strong>
+          <ul className='gap-2 flex py-1'>
             {loadingPetsData && <Loader/>}
             {loadingPetsError && <h1>{loadingPetsError}</h1>}
             {pets && pets.map((pet: TResponsePet) => {
-              return <li key={pet.petId} className='border border-black p-1'>
-                <strong className='text-2xl'>{pet.breed} {pet.name}</strong>
-                <Link to={`/pet/${pet.petId}`}>
-                  <button className='bg-sky-500 text-xl rounded-lg text-center 
-                    p-1 px-2 text-white'
-                  > Открыть </button>
-                </Link>
-              </li>
+              return <Link to={`/pet/${pet.petId}`} key={pet.petId} 
+                className='border-[#594996] p-1 border-4 rounded-md cursor-pointer 
+                group hover:border-[#768AEE] flex items-center px-2'
+              >
+                  <strong className='text-2xl text-[#39305d] group-hover:text-[#14182d]'>
+                    {pet.breed} {pet.name}
+                  </strong>
+              </Link>
             })}
+            <button onClick={() => $petModal.current?.showModal()}
+              className='bg-[#FEB1AF] text-white text-2xl rounded-full text-center p-2'>
+                <img src="@/../public/plus.svg" alt="plus icon" 
+                  className='size-10'/>
+              </button>
           </ul>
-          <button onClick={() => $petModal.current?.showModal()}
-            className='bg-red-500 text-white text-2xl rounded-lg text-center p-1 px-2'>
-              Добавить хвостика
-          </button>
-          <dialog ref={$petModal}>
+          <dialog ref={$petModal} className='border border-black rounded-md px-2
+            py-1'>
             <form onSubmit={submitHandler}>
               <RegPetForm {...petFormData} updateFields={updateFields}/>
-              <button>Создать питомца</button>
+              <button className='bg-sky-500 text-white text-lg rounded-lg text-center p-1 px-2'>
+                Создать питомца
+              </button>
             </form>
-            <button onClick={() => $petModal.current?.close()}>Закрыть</button>
+            <button onClick={() => $petModal.current?.close()}
+              className='bg-red-500 text-white text-lg rounded-lg text-center p-1 px-2'>
+                Закрыть
+            </button>
           </dialog>
         </div>
       </section>
-    </>
+    </div>
   )
 }

@@ -9,12 +9,13 @@ export const RegPetForm:FC<RegPetFormProps> = ({
     petName, petAge, updateFields, petWeight, petBreed
 }) => {
   return (
-    <fieldset>
+    <fieldset className='flex flex-col'>
         <legend>Регистрация питомца</legend>
         <GetBreedForm petBreed={petBreed} updateFields={updateFields}/>
         <input type="text" 
             placeholder="Имя..."
             value={petName}
+            className='border border-black'
             required
             minLength={2}
             maxLength={32}
@@ -26,6 +27,7 @@ export const RegPetForm:FC<RegPetFormProps> = ({
             <input type="number" 
                 placeholder="Возраст"
                 value={petAge}
+                className='border border-black'
                 required
                 min={-1}
                 max={150}
@@ -39,6 +41,7 @@ export const RegPetForm:FC<RegPetFormProps> = ({
             <input type="number" 
                 placeholder="Вес..."
                 value={petWeight}
+                className='border border-black'
                 required
                 min={-1}
                 max={150}
