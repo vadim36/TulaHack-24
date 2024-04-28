@@ -40,7 +40,7 @@ model Task {
     taskBody    String
     taskStatus  Statuses
     owner       User     @relation(fields: [ownerId], references: [username])
-    ownerId     String   @unique
+    ownerId     String 
 }
 
 model Habit {

@@ -54,3 +54,8 @@ interface TResponsePet {
     petId: string,
     ownerId: string
 }
+
+interface ITask {
+    taskBody: string,
+    taskStatus: Statuses
+}

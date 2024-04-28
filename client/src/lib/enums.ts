@@ -6,3 +6,9 @@ export enum Paths {
     pet = '/pet/:id',
     all = '*'
 }
+
+export enum Statuses {
+    Todo,
+    InProgress,
+    Completed
+}

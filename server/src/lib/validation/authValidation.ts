@@ -1,4 +1,4 @@
-import {object, string, minLength, maxLength, email, number, minValue, maxValue} from 'valibot'
+import {object, string, minLength, maxLength, email, number, minValue, maxValue, defaultArgs} from 'valibot'
 
 export const RegistrationScheme = object({
   name: string('the user name must be a string', [
@@ -55,4 +55,12 @@ export const PetRegScheme = object({
       minValue(-1, 'the pet weight must be -1 and more'),
       maxValue(150, 'tha pet weight must be 150 and less')
   ])
+})
+
+export const TaskScheme = object({
+  taskBody: string('the task body must be a string', [
+    minLength(3, 'the task body must be longer than 3'),
+    maxLength(64, 'the task body must be less than 64')
+  ]),
+  taskStatus: number('the task status must be a number')
 })

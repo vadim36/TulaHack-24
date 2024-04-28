@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser'
 import errorMiddleware from './middlewares/errorMiddleware'
 import cors from 'cors'
 import petsRouter from './routes/petsRouter'
+import tasksRouter from './routes/tasksRouter'
 
 config()
 const app = express()
@@ -18,6 +19,7 @@ app.use(cors({
 }))
 app.use('/auth', authRouter)
 app.use('/pets', petsRouter)
+app.use('/tasks', tasksRouter)
 app.use(errorMiddleware)
 
 app.listen(PORT, () => console.log(`Work on ${PORT}`))

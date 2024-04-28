@@ -31,7 +31,8 @@ export const AppBar:FC = () => {
                   })}
               </ul>
           </nav>
-          <button onClick={logout}>Выйти</button>
+          <button className='bg-red-500 px-2 text-xl rounded-lg relative active:top-1
+            text-white' onClick={logout}>Выйти</button>
       </header>
     )
 }

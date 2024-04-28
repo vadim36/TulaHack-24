@@ -16,3 +16,8 @@ interface Pet {
   petAge: number,
   petWeight: number
 }
+
+interface ITask {
+  taskBody: string,
+  taskStatus: Statuses
+}
