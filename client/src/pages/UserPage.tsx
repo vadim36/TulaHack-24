@@ -4,6 +4,8 @@ import { AuthContext } from '@/lib/context'
 import $api from '@/lib/http'
 import { RegPetForm } from '@/components/RegPetForm'
 import { Link } from 'react-router-dom'
+import useFetching from '@/hooks/useFetching'
+import { Loader } from '@/components/Loader'
 
 const INITIAL_FORM_STATE: PetData = {
   petBreed: 'Кошка',
@@ -18,18 +20,13 @@ export const UserPage:FC = () => {
   const [pets, setPets] = useState<TResponsePet[]>([])
   const $petModal = useRef<HTMLDialogElement | null>(null)
   const [petFormData, setPetFormData] = useState<PetData>(INITIAL_FORM_STATE)
+  const [fetchPets, loadingPetsData, loadingPetsError] = useFetching(async () => {
+    const response = await $api.get('/pets/getAll', {
+      params: { accessToken: userDto.tokens.accessToken}
+    })
 
-  async function fetchPets() {
-    try {
-      const response = await $api.get('/pets/getAll', {
-        params: { accessToken: userDto.tokens.accessToken}
-      })
-
-      return setPets(response.data)
-    } catch (error: unknown) {
-      return alert(error as Error)
-    }
-  }
+    return setPets(response.data)
+  })
 
   function updateFields(fields: Partial<PetData>) {
     return setPetFormData((prev: PetData) => {
@@ -74,7 +71,9 @@ export const UserPage:FC = () => {
         <div>
           <strong>Мои хвостики:</strong>
           <ul className='flex gap-2'>
-            {pets.map((pet: TResponsePet) => {
+            {loadingPetsData && <Loader/>}
+            {loadingPetsError && <h1>{loadingPetsError}</h1>}
+            {pets && pets.map((pet: TResponsePet) => {
               return <li key={pet.petId} className='border border-black p-1'>
                 <strong className='text-2xl'>{pet.breed} {pet.name}</strong>
                 <Link to={`/pet/${pet.petId}`}>
@@ -87,7 +86,7 @@ export const UserPage:FC = () => {
           </ul>
           <button onClick={() => $petModal.current?.showModal()}
             className='bg-red-500 text-white text-2xl rounded-lg text-center p-1 px-2'>
-              Добавить питомца
+              Добавить хвостика
           </button>
           <dialog ref={$petModal}>
             <form onSubmit={submitHandler}>

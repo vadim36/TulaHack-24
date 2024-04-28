@@ -61,6 +61,19 @@ class PetsController {
             return next(error as Error)
         }
     }
+
+    async deletePet(
+        request: Request<{}, {}, {petId: string}>, 
+        response: Response, next: Function
+    ) {
+        try {
+            const petId = parse(string(), request.body.petId)
+            await prisma.pet.delete({where: {petId}})
+            response.status(201)
+        } catch (error: unknown) {
+            return next(error as Error)
+        }  
+    }
 }
 
 export default new PetsController()
